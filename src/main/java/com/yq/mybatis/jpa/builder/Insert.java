@@ -2,6 +2,7 @@ package com.yq.mybatis.jpa.builder;
 
 
 import com.yq.mybatis.jpa.entity.Dialect;
+import com.yq.mybatis.jpa.entity.IncreaseLongId;
 import com.yq.mybatis.jpa.entity.Property;
 import com.yq.mybatis.jpa.entity.TypeSketch;
 import com.yq.mybatis.jpa.exception.MybatisJpaException;
@@ -128,6 +129,12 @@ public class Insert extends AbstractBuilder<Insert> {
                 if (property.getType() == String.class) {
                     builder.keyGenerator(new UUIDKeyGenerator());
                 } else if (property.getType() == Integer.class) {
+                    if (dialect == Dialect.ORACLE) {
+                        builder.keyGenerator(new SequenceKeyGenerator(dialect, property.getGenerator()));
+                    } else {
+                        builder.keyGenerator(new Jdbc3KeyGenerator());
+                    }
+                } else if (property.getType() == Long.class) {
                     if (dialect == Dialect.ORACLE) {
                         builder.keyGenerator(new SequenceKeyGenerator(dialect, property.getGenerator()));
                     } else {

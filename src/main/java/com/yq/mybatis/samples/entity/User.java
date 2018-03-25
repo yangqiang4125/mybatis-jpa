@@ -7,7 +7,8 @@ public class User {
 
     @Id
     @GeneratedValue(generator = "test_user_seq")
-    private Integer id;
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
     private Integer age;
     private String mobilePhone;
@@ -25,11 +26,11 @@ public class User {
         this.sort = sort;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

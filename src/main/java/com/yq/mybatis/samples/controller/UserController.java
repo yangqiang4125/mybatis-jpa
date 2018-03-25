@@ -22,6 +22,12 @@ public class UserController {
     @RequestMapping("/")
     public Object getUser(){
         //User user = userMapper.find(1);
+        User user = new User();
+        user.setMobilePhone("18623192310");
+        user.setName("yafen2");
+        user.setAge(12);
+        user.setSort(16);
+        int count = userMapper.insert(user);
         List<User> list = userMapper.findOrderByAge();
         //String age = userMapper.findAgeById(1);
         return list;
